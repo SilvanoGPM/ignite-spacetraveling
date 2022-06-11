@@ -1,8 +1,11 @@
+import { Header } from 'components/Header';
+
+import styles from './home.module.scss';
+
 export default function Home() {
   return (
-    <>
-      <h1>Ready to Code</h1>
-      <p>Hello</p>
-    </>
+    <div className={styles.container}>
+      <Header />
+    </div>
   );
 }
