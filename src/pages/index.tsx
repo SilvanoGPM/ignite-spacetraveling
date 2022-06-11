@@ -1,5 +1,8 @@
-import { Main } from 'components/Main';
-
 export default function Home() {
-  return <Main />;
+  return (
+    <>
+      <h1>Ready to Code</h1>
+      <p>Hello</p>
+    </>
+  );
 }
