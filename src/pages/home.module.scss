@@ -1,3 +1,45 @@
 .container {
+  margin: 4rem 0;
+}
+
+.postsContainer {
   margin-top: 4rem;
+}
+
+.post {
+  margin-bottom: 3rem;
+
+  &Title {
+    font-size: 1.75rem;
+  }
+
+  &Subtitle {
+    font-size: 1.125rem;
+    margin-top: 0.5rem;
+  }
+
+  &Info {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.875rem;
+
+    &Item {
+      display: flex;
+      align-items: center;
+
+      svg {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+}
+
+.loadMorePosts {
+  margin-top: 1rem;
+  background-color: transparent;
+  border: none;
+  font-weight: 600;
+  color: var(--pink-500);
 }
