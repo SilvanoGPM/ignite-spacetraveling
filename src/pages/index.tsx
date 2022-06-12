@@ -1,15 +1,15 @@
 import { FiCalendar, FiUser } from 'react-icons/fi';
 import Link from 'next/link';
 import { GetStaticProps } from 'next';
+import { PrismicDocument } from '@prismicio/types';
+import { useState } from 'react';
 
 import { Header } from 'components/Header';
 import { getPrismicClient } from 'services/prismic';
+import { dateFormatter } from 'utils/formatters';
 
 import styles from './home.module.scss';
 import commonStyles from '../styles/common.module.scss';
-import { dateFormatter } from 'utils/formatters';
-import { useState } from 'react';
-import { PrismicDocument } from '@prismicio/types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PostRaw = PrismicDocument<Record<string, any>>;
@@ -72,7 +72,7 @@ export default function Home({ data }: HomeProps) {
             <div key={post.slug} className={styles.post}>
               <h2 className={styles.postTitle}>
                 <Link href={`/post/${post.slug}`}>
-                  <a>{post.title}</a>
+                  <a className={commonStyles.link}>{post.title}</a>
                 </Link>
               </h2>
 

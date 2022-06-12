@@ -42,4 +42,38 @@
   border: none;
   font-weight: 600;
   color: var(--pink-500);
+  position: relative;
+
+  &::after,
+  &::before {
+    content: '';
+    display: block;
+    background-color: var(--pink-500);
+    height: 2px;
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    left: 50%;
+    transition: left 0.2s, right 0.2s;
+  }
+
+  &:hover::after {
+    left: 0;
+  }
+
+  &:hover::before {
+    right: 0;
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &:focus-visible::after {
+    left: 0;
+  }
+
+  &:focus-visible::before {
+    right: 0;
+  }
 }

@@ -3,3 +3,10 @@
   margin: 0 auto;
   padding: 0 2rem;
 }
+
+.link {
+  &:focus-visible {
+    outline: none;
+    text-decoration: underline;
+  }
+}
