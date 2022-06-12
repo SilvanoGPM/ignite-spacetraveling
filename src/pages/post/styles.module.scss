@@ -1,0 +1,60 @@
+.header {
+  margin: 2rem 0;
+}
+
+.banner {
+  width: 100%;
+  height: 400px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.post {
+  margin: 5rem auto;
+  padding: 0 1rem;
+
+  &Title {
+    font-size: 3rem;
+  }
+
+  &Info {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.875rem;
+
+    &Item {
+      display: flex;
+      align-items: center;
+
+      svg {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+  &Group {
+    margin-top: 4rem;
+
+    &Heading {
+      margin-bottom: 3rem;
+      font-size: 1.8rem;
+    }
+
+    &Content {
+      font-size: 1.125rem;
+
+      a {
+        color: var(--pink-500);
+      }
+
+      ul, ol {
+        padding-left: 1rem;
+      }
+    }
+  }
+}

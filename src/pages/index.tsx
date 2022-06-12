@@ -54,7 +54,7 @@ export default function Home({ data }: HomeProps) {
       const response = await fetch(posts.next_page || '');
       const { results, next_page }: MorePostsResponse = await response.json();
 
-      const newPosts = results.map<Post>(formatPost);
+      const newPosts = results.map(formatPost);
 
       setPosts({ results: [...posts.results, ...newPosts], next_page });
     } catch {
