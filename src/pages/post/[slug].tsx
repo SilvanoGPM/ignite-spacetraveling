@@ -7,6 +7,7 @@ import { FiCalendar, FiUser, FiClock } from 'react-icons/fi';
 
 import { getPrismicClient } from 'services/prismic';
 import { dateFormatter } from 'utils/formatters';
+import { Comments } from 'components/Comments';
 
 import styles from './styles.module.scss';
 import commonStyles from '../../styles/common.module.scss';
@@ -78,6 +79,8 @@ export default function Post({ post }: PostProps) {
             </div>
           ))}
         </article>
+
+        <Comments />
       </main>
     </>
   );
