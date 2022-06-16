@@ -11,23 +11,29 @@ import { Comments } from 'components/Comments';
 
 import styles from './styles.module.scss';
 import commonStyles from '../../styles/common.module.scss';
+import Link from 'next/link';
+import { PrismicDocument } from '@prismicio/types';
+
+interface Post {
+  slug: string;
+  author: string;
+  publicatedAt: string;
+  updatedAt: string;
+  title: string;
+  banner: string;
+  content: Array<{ heading: string; body: string }>;
+  timeReading: number;
+}
 
 interface PostProps {
-  post: {
-    slug: string;
-    author: string;
-    publicatedAt: string;
-    updatedAt: string;
-    title: string;
-    banner: string;
-    content: Array<{ heading: string; body: string }>;
-    timeReading: number;
-  };
+  post: Post;
+  nextPost: Post | null;
+  prevPost: Post | null;
 }
 
 const HUMAN_WORDS_PER_MINUTE_AVG = 200;
 
-export default function Post({ post }: PostProps) {
+export default function Post({ post, nextPost, prevPost }: PostProps) {
   const router = useRouter();
 
   if (router.isFallback) {
@@ -85,7 +91,35 @@ export default function Post({ post }: PostProps) {
           ))}
         </article>
 
-        <Comments />
+        <div className={commonStyles.maxWidth}>
+          <hr className={styles.divider} />
+        </div>
+
+        <div className={`${commonStyles.maxWidth} ${styles.postsNavigation}`}>
+          {prevPost ? (
+            <div>
+              <p className={styles.navigationTitle}>{prevPost.title}</p>
+              <Link href={`/post/${prevPost.slug}`}>
+                <a>Post anterior</a>
+              </Link>
+            </div>
+          ) : (
+            <div style={{ flex: 1 }} />
+          )}
+
+          {nextPost && (
+            <div>
+              <p>{nextPost.title}</p>
+              <Link href={`/post/${nextPost.slug}`}>
+                <a>Próximo post</a>
+              </Link>
+            </div>
+          )}
+        </div>
+
+        <div className={commonStyles.maxWidth}>
+          <Comments />
+        </div>
       </main>
     </>
   );
@@ -102,6 +136,18 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return { paths, fallback: true };
 };
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function mapPost(post: PrismicDocument<Record<string, any>, string, string>) {
+  return {
+    slug: post.uid,
+    title: post.data.title,
+    author: post.data.author,
+    publicatedAt: dateFormatter(new Date(post.first_publication_date)),
+    updatedAt: dateTimeFormatter(new Date(post.last_publication_date)),
+    banner: post.data.banner.url,
+  };
+}
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const prismic = getPrismicClient();
@@ -127,18 +173,38 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const timeReading = Math.ceil(totalOfWords / HUMAN_WORDS_PER_MINUTE_AVG);
 
   const post = {
-    slug: response.uid,
-    title: response.data.title,
-    author: response.data.author,
-    publicatedAt: dateFormatter(new Date(response.first_publication_date)),
-    updatedAt: dateTimeFormatter(new Date(response.last_publication_date)),
-    banner: response.data.banner.url,
+    ...mapPost(response),
     timeReading: `${timeReading} min`,
     content,
   };
 
+  const nextPostResponse = await prismic.getByType('post', {
+    pageSize: 1,
+    orderings: 'document.first_publication_date',
+    after: response.id,
+  });
+
+  const prevPostResponse = await prismic.getByType('post', {
+    pageSize: 1,
+    orderings: 'document.first_publication_date desc',
+    after: response.id,
+  });
+
+  const nextPost = nextPostResponse.results[0]
+    ? mapPost(nextPostResponse.results[0])
+    : null;
+
+  const prevPost = prevPostResponse.results[0]
+    ? mapPost(prevPostResponse.results[0])
+    : null;
+
   return {
-    props: { post },
+    props: {
+      post,
+      nextPost,
+      prevPost,
+    },
+
     revalidate: 60 * 60, // one hour
   };
 };
