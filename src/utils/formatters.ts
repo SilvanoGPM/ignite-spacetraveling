@@ -6,3 +6,9 @@ export function dateFormatter(date: Date) {
     locale: ptBR,
   });
 }
+
+export function dateTimeFormatter(date: Date) {
+  return format(date, "dd MMM yyyy, 'às' HH:mm", {
+    locale: ptBR,
+  });
+}

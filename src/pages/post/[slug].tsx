@@ -6,7 +6,7 @@ import { RichText } from 'prismic-dom';
 import { FiCalendar, FiUser, FiClock } from 'react-icons/fi';
 
 import { getPrismicClient } from 'services/prismic';
-import { dateFormatter } from 'utils/formatters';
+import { dateFormatter, dateTimeFormatter } from 'utils/formatters';
 import { Comments } from 'components/Comments';
 
 import styles from './styles.module.scss';
@@ -16,6 +16,7 @@ interface PostProps {
   post: {
     slug: string;
     author: string;
+    publicatedAt: string;
     updatedAt: string;
     title: string;
     banner: string;
@@ -54,7 +55,7 @@ export default function Post({ post }: PostProps) {
           <div className={styles.postInfo}>
             <p className={styles.postInfoItem}>
               <FiCalendar size={15} />
-              <span>{post.updatedAt}</span>
+              <span>{post.publicatedAt}</span>
             </p>
 
             <p className={styles.postInfoItem}>
@@ -67,6 +68,10 @@ export default function Post({ post }: PostProps) {
               <span>{post.timeReading}</span>
             </p>
           </div>
+
+          <em className={styles.postUpdatedAt}>
+            * editado em {post.updatedAt}
+          </em>
 
           {post.content.map((group) => (
             <div key={group.heading} className={styles.postGroup}>
@@ -125,7 +130,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     slug: response.uid,
     title: response.data.title,
     author: response.data.author,
-    updatedAt: dateFormatter(new Date(response.last_publication_date)),
+    publicatedAt: dateFormatter(new Date(response.first_publication_date)),
+    updatedAt: dateTimeFormatter(new Date(response.last_publication_date)),
     banner: response.data.banner.url,
     timeReading: `${timeReading} min`,
     content,
