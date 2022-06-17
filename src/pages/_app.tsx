@@ -17,7 +17,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
         <meta
           name="description"
-          content="Viage nas informações com Spacetraveling, o melhor blog sobre React."
+          content="Viage nas informações com Spacetraveling, o melhor blog sobre o universo React."
         />
       </Head>
 

@@ -20,8 +20,11 @@ export default function Document() {
         <link rel="shortcut icon" href="/favicon.svg" />
         <link rel="manifest" href="/manifest.json" />
 
-        <meta name="description" content="Boilerplate for NextJS projects" />
-        <meta name="theme-color" content="#FFFFFF" />
+        <meta
+          name="description"
+          content="Viage nas informações com Spacetraveling, o melhor blog sobre o universo React."
+        />
+        <meta name="theme-color" content="#FF57B2" />
       </Head>
       <body>
         <Main />

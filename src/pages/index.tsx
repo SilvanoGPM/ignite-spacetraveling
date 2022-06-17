@@ -67,13 +67,13 @@ export default function Home({ data }: HomeProps) {
     <>
       <NextSeo
         title="Home - Spacetraveling"
-        description="Viage nas informações com Spacetraveling, o melhor blog sobre React."
+        description="Viage nas informações com Spacetraveling, o melhor blog sobre o universo React."
         canonical="https://spacetraveling-sky.netlify.app/"
         openGraph={{
           url: 'https://spacetraveling-sky.netlify.app/',
           title: 'Home - Spacetraveling',
           description:
-            'Viage nas informações com Spacetraveling, o melhor blog sobre React.',
+            'Viage nas informações com Spacetraveling, o melhor blog sobre o universo React.',
           site_name: 'Spacetraveling',
           images: [
             {

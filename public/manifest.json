@@ -28,7 +28,7 @@
     }
   ],
   "theme_color": "#FFFFFF",
-  "description": "Viage nas informações com Spacetraveling, o melhor blog sobre React.",
+  "description": "Viage nas informações com Spacetraveling, o melhor blog sobre o universo React.",
   "background_color": "#FF57B2",
   "start_url": "/",
   "display": "standalone",

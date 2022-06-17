@@ -113,8 +113,8 @@ export default function Post({ post, nextPost, prevPost }: PostProps) {
 
         <div className={`${commonStyles.maxWidth} ${styles.postsNavigation}`}>
           {prevPost ? (
-            <div>
-              <p className={styles.navigationTitle}>{prevPost.title}</p>
+            <div className={styles.navigationItem}>
+              <p title={prevPost.title}>{prevPost.title}</p>
               <Link href={`/post/${prevPost.slug}`}>
                 <a>Post anterior</a>
               </Link>
@@ -124,10 +124,10 @@ export default function Post({ post, nextPost, prevPost }: PostProps) {
           )}
 
           {nextPost && (
-            <div>
-              <p>{nextPost.title}</p>
+            <div className={styles.navigationItem}>
+              <p title={nextPost.title}>{nextPost.title}</p>
               <Link href={`/post/${nextPost.slug}`}>
-                <a>Próximo post</a>
+                <a className={styles.nextPost}>Próximo post</a>
               </Link>
             </div>
           )}

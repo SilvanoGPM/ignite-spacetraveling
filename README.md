@@ -2,7 +2,7 @@
   <img src="public/images/logo.svg" />
 </p>
 
-<p align="center">Viage nas informações com Spacetraveling, o melhor blog sobre React. <br /> Desafio Ignite.</p>
+<p align="center">Viage nas informações com Spacetraveling, o melhor blog sobre o universo React.<br /> Desafio Ignite.</p>
 
 ## 🚀 Tecnologias utilizadas
 
