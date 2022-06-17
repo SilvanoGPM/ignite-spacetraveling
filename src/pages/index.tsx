@@ -2,6 +2,7 @@ import { FiCalendar, FiUser } from 'react-icons/fi';
 import Link from 'next/link';
 import { GetStaticProps } from 'next';
 import { PrismicDocument } from '@prismicio/types';
+import { NextSeo } from 'next-seo';
 import { useState } from 'react';
 
 import { Header } from 'components/Header';
@@ -63,46 +64,69 @@ export default function Home({ data }: HomeProps) {
   }
 
   return (
-    <div className={styles.container}>
-      <Header />
+    <>
+      <NextSeo
+        title="Home - Spacetraveling"
+        description="Viage nas informações com Spacetraveling, o melhor blog sobre React."
+        canonical="https://spacetraveling-sky.netlify.app/"
+        openGraph={{
+          url: 'https://spacetraveling-sky.netlify.app/',
+          title: 'Home - Spacetraveling',
+          description:
+            'Viage nas informações com Spacetraveling, o melhor blog sobre React.',
+          site_name: 'Spacetraveling',
+          images: [
+            {
+              url: 'https://spacetraveling-sky.netlify.app/images/cover.png',
+              width: 1280,
+              height: 720,
+              alt: 'Spacetraveling',
+            },
+          ],
+        }}
+      />
 
-      <main className={`${commonStyles.maxWidth} ${styles.postsContainer}`}>
-        <section>
-          {posts.results.map((post) => (
-            <div key={post.slug} className={styles.post}>
-              <h2 className={styles.postTitle}>
-                <Link href={`/post/${post.slug}`}>
-                  <a className={commonStyles.link}>{post.title}</a>
-                </Link>
-              </h2>
+      <div className={styles.container}>
+        <Header />
 
-              <p className={styles.postSubtitle}>{post.subTitle}</p>
+        <main className={`${commonStyles.maxWidth} ${styles.postsContainer}`}>
+          <section>
+            {posts.results.map((post) => (
+              <div key={post.slug} className={styles.post}>
+                <h2 className={styles.postTitle}>
+                  <Link href={`/post/${post.slug}`}>
+                    <a className={commonStyles.link}>{post.title}</a>
+                  </Link>
+                </h2>
 
-              <div className={styles.postInfo}>
-                <p className={styles.postInfoItem}>
-                  <FiCalendar size={15} />
-                  <span>{post.updatedAt}</span>
-                </p>
+                <p className={styles.postSubtitle}>{post.subTitle}</p>
 
-                <p className={styles.postInfoItem}>
-                  <FiUser size={15} />
-                  <span>{post.author}</span>
-                </p>
+                <div className={styles.postInfo}>
+                  <p className={styles.postInfoItem}>
+                    <FiCalendar size={15} />
+                    <span>{post.updatedAt}</span>
+                  </p>
+
+                  <p className={styles.postInfoItem}>
+                    <FiUser size={15} />
+                    <span>{post.author}</span>
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
-        </section>
+            ))}
+          </section>
 
-        {posts.next_page && (
-          <button
-            className={styles.loadMorePosts}
-            onClick={handleLoadMorePosts}
-          >
-            Carregar mais posts
-          </button>
-        )}
-      </main>
-    </div>
+          {posts.next_page && (
+            <button
+              className={styles.loadMorePosts}
+              onClick={handleLoadMorePosts}
+            >
+              Carregar mais posts
+            </button>
+          )}
+        </main>
+      </div>
+    </>
   );
 }
 

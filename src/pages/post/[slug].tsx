@@ -1,9 +1,11 @@
 import { Header } from 'components/Header';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { RichText } from 'prismic-dom';
 import { FiCalendar, FiUser, FiClock } from 'react-icons/fi';
+import { NextSeo } from 'next-seo';
+import { PrismicDocument } from '@prismicio/types';
+import Link from 'next/link';
 
 import { getPrismicClient } from 'services/prismic';
 import { dateFormatter, dateTimeFormatter } from 'utils/formatters';
@@ -11,8 +13,6 @@ import { Comments } from 'components/Comments';
 
 import styles from './styles.module.scss';
 import commonStyles from '../../styles/common.module.scss';
-import Link from 'next/link';
-import { PrismicDocument } from '@prismicio/types';
 
 interface Post {
   slug: string;
@@ -20,6 +20,7 @@ interface Post {
   publicatedAt: string;
   updatedAt: string;
   title: string;
+  subTitle: string;
   banner: string;
   content: Array<{ heading: string; body: string }>;
   timeReading: number;
@@ -42,9 +43,24 @@ export default function Post({ post, nextPost, prevPost }: PostProps) {
 
   return (
     <>
-      <Head>
-        <title>Criando um app CRA do zero - Spacetraveling</title>
-      </Head>
+      <NextSeo
+        title={`${post.title} - Spacetraveling`}
+        description={post.subTitle}
+        canonical="https://spacetraveling-sky.netlify.app/"
+        openGraph={{
+          url: 'https://spacetraveling-sky.netlify.app/',
+          title: `${post.title} - Spacetraveling`,
+          description: post.subTitle,
+          images: [
+            {
+              url: post.banner,
+              width: 1280,
+              height: 720,
+              alt: post.title,
+            },
+          ],
+        }}
+      />
 
       <div className={styles.header}>
         <Header />
@@ -142,6 +158,7 @@ function mapPost(post: PrismicDocument<Record<string, any>, string, string>) {
   return {
     slug: post.uid,
     title: post.data.title,
+    subTitle: post.data.subtitle,
     author: post.data.author,
     publicatedAt: dateFormatter(new Date(post.first_publication_date)),
     updatedAt: dateTimeFormatter(new Date(post.last_publication_date)),
