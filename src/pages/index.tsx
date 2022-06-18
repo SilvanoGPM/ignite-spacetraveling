@@ -33,7 +33,7 @@ interface MorePostsResponse {
   next_page: string | null;
 }
 
-interface HomeProps {
+export interface HomeProps {
   data: Data;
 }
 
@@ -42,7 +42,7 @@ function formatPost(post: PostRaw): Post {
     slug: post.uid as string,
     title: post.data.title as string,
     subTitle: post.data.subtitle as string,
-    updatedAt: dateFormatter(new Date(post.last_publication_date)),
+    updatedAt: dateFormatter(new Date(post.first_publication_date)),
     author: post.data.author as string,
   };
 }
@@ -56,6 +56,8 @@ export default function Home({ data }: HomeProps) {
       const { results, next_page }: MorePostsResponse = await response.json();
 
       const newPosts = results.map(formatPost);
+
+      console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAA\n\n\n\n\n');
 
       setPosts({ results: [...posts.results, ...newPosts], next_page });
     } catch {
