@@ -23,13 +23,13 @@ interface Post {
   subTitle: string;
   banner: string;
   content: Array<{ heading: string; body: string }>;
-  timeReading: number;
+  timeReading: string;
 }
 
-interface PostProps {
+export interface PostProps {
   post: Post;
-  nextPost: Post | null;
-  prevPost: Post | null;
+  nextPost?: Post | null;
+  prevPost?: Post | null;
 }
 
 const HUMAN_WORDS_PER_MINUTE_AVG = 200;
@@ -38,7 +38,7 @@ export default function Post({ post, nextPost, prevPost }: PostProps) {
   const router = useRouter();
 
   if (router.isFallback) {
-    return 'Carregando...';
+    return <h1>Carregando...</h1>;
   }
 
   return (
