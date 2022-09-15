@@ -17,7 +17,7 @@
 ![image](https://user-images.githubusercontent.com/59753526/173221507-7652cca5-223d-459b-ab32-6e624c0c3cc7.png)
 ![image](https://user-images.githubusercontent.com/59753526/173221516-0cda70c2-cf68-4f18-8119-9abe5f01e9ee.png)
 ![image](https://user-images.githubusercontent.com/59753526/173221526-ae28449a-5a94-43d7-a2a4-02263598bd75.png)
-
+![image](/public/images/cover.png)
 
 ## 🔨 Como executar
 
