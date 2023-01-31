@@ -13,7 +13,7 @@ export function Comments() {
     scriptEl.setAttribute('src', 'https://utteranc.es/client.js');
     scriptEl.setAttribute('crossorigin', 'anonymous');
     scriptEl.setAttribute('async', 'true');
-    scriptEl.setAttribute('repo', 'SkyG0D/ignite-spacetraveling');
+    scriptEl.setAttribute('repo', 'SilvanoGPM/ignite-spacetraveling');
     scriptEl.setAttribute('label', 'spacetraveling-comments');
     scriptEl.setAttribute('issue-term', 'title');
     scriptEl.setAttribute('theme', 'github-dark');
